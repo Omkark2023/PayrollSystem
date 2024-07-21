@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -16,10 +17,16 @@ import java.util.Date;
 @NoArgsConstructor
 public class PaySlip {
     @Id
-    private String id;
+    private String paydate;
+    private String empid;
     private String empemail;
     private String emp_name;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    Date payDate;
+    Date pay;
     private Double amount;
+
+    public void setPaydate(Date pay) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        this.paydate = formatter.format(pay);
+    }
 }

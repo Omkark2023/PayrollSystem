@@ -6,10 +6,12 @@ import com.example.payroll.model.resignationmodel;
 import com.example.payroll.service.PaySlipService;
 import com.example.payroll.service.SalaryUpdateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -31,8 +33,8 @@ public class AdminController {
     }
     @PostMapping("/postpayslip/{email}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<PaySlip> addPaySlip(@PathVariable String email , @RequestParam Double salary) {
-        PaySlip savedPaySlip = paySlipService.savePaySlip(email,salary);
+    public ResponseEntity<PaySlip> addPaySlip(@PathVariable String email , @RequestParam Double salary , @RequestParam  @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+        PaySlip savedPaySlip = paySlipService.savePaySlip(email,salary , date);
         return ResponseEntity.ok(savedPaySlip);
     }
 

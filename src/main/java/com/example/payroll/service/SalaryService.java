@@ -49,9 +49,10 @@ public class SalaryService {
             }
 
             PaySlip paySlip = new PaySlip();
+            paySlip.setEmpid(employee.getEmp_id());
             paySlip.setEmpemail(employee.getEmpemail());
             paySlip.setEmp_name(employee.getEmp_name());
-            paySlip.setPayDate(today);
+            paySlip.setPaydate(today);
             paySlip.setAmount(salary);
             paySlipRepository.save(paySlip);
         }

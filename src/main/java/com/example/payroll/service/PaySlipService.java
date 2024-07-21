@@ -18,14 +18,14 @@ public class PaySlipService {
     @Autowired
     private UserRepo userRepository;
 
-    public PaySlip savePaySlip(String email , Double Salary) {
+    public PaySlip savePaySlip(String email , Double Salary , Date date) {
 
         Optional<User> user = userRepository.findByEmpemail(email);
         PaySlip paySlip = new PaySlip();
-        paySlip.setId(user.get().getEmp_id());
+        paySlip.setEmpid(user.get().getEmp_id());
         paySlip.setEmpemail(user.get().getEmpemail());
         paySlip.setEmp_name(user.get().getEmp_name());
-        paySlip.setPayDate(new Date());
+        paySlip.setPaydate(date);
         paySlip.setAmount(Salary);
         return paySlipRepository.save(paySlip);
     }
